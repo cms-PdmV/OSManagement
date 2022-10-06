@@ -14,7 +14,7 @@ elif [[ $cvmfs_probe == *"$fail_status"* ]];
 then
     echo "/cvmfs health test failed. Remounting the filesystem."
     # Hardcode the path to the remounting script to enfoce both of these scripts are stored in /root/os
-    bash /root/os/cvmfs-mount.sh
+    bash /root/os/cvmfs/cvmfs-mount.sh
 else
     echo "Error executing cvmfs_config tool. Please check this program is available inside the VM"    
 fi
