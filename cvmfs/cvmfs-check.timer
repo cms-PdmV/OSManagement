@@ -1,0 +1,9 @@
+[Unit]
+Description=Run cvmfs-check service recurrently to check if this filesystem is properly mounted
+
+[Timer]
+OnCalendar=minutely
+Persistent=true
+
+[Install]
+WantedBy=timers.target

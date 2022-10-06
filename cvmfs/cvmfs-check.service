@@ -1,0 +1,14 @@
+[Unit]
+Description = CVMFS Filesystem Checker
+After = network.target autofs.services
+
+[Service]
+Type = simple
+User = root
+WorkingDirectory = /root/os/cvmfs/
+ExecStart = /bin/bash cvmfs-check.sh
+Restart = on-failure
+RestartSec = 10
+
+[Install]
+WantedBy = multi-user.target
