@@ -6,7 +6,6 @@
 echo "CVMFS File System Checker"
 echo "To work properly, this script requires root privileges to copy the program files inside /root"
 echo "and create a service in systemd"
-echo "Please enter root password"
 
 # Ask for root permissions
 [ "$UID" -eq 0 ] || { echo "This script must be run as root."; exit 1;}
