@@ -1,0 +1,30 @@
+{
+  "security_group": "<SEC GROUP NAME>",
+  "ports": [
+    {
+      "dst_port": "80:80",
+      "description": "Allow HTTP access"
+    },
+    {
+      "dst_port": "443:443",
+      "description": "Allow HTTPS access"
+    }    
+  ],
+  "trusted_sources": [
+    {
+      "host": "<TRUSTED HOST 1>",
+      "ips": [
+        "<CIDR IPv4 #1>",
+        "<CIDR IPv4 #2>"
+      ]
+    },
+    {
+      "host": "<TRUSTED HOST 2>",
+      "ips": [
+        "<CIDR IPv4 #1>"
+      ]
+    }
+  ]
+}
+
+

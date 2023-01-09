@@ -1,6 +1,7 @@
 # Deploy kubernetes cluster using OpenStack
 # Authenticate to OpenStack using a OpenStack RC file for a project
 # Use lxplus8.cern.ch to execute this script
+# If you want more details, please see https://kubernetes.docs.cern.ch/docs/getting-started/
 
 CLUSTER_NAME=$1
 

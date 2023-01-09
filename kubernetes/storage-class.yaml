@@ -1,0 +1,21 @@
+# More details about available volumes:
+# https://clouddocs.web.cern.ch/details/block_volumes.html
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cinder-standard-delete
+provisioner: cinder.csi.openstack.org
+reclaimPolicy: Delete # Default policy
+allowVolumeExpansion: true
+parameters:
+  type: standard
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cinder-io2-delete
+provisioner: cinder.csi.openstack.org
+reclaimPolicy: Delete # Default policy
+allowVolumeExpansion: true
+parameters:
+  type: io2
