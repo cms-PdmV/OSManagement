@@ -1,5 +1,17 @@
 # Deploy a nginx service to test the cluster
 # For more details see http://https://kubernetes.docs.cern.ch/docs/getting-started/#scale-a-cluster
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cinder-standard-volume
+spec:
+  storageClassName: cinder-standard-delete
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,11 +28,20 @@ spec:
       labels:
         app: nginx-loadbalance
     spec:
+      volumes:
+        - name: nginx-volume
+          persistentVolumeClaim:
+            claimName: cinder-standard-volume
+            readOnly: false
       containers:
         - name: nginx
           image: nginx:1.15.5
           ports:
             - containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/www/html
+              name: nginx-volume
           resources:
             requests:
               memory: "30Mi"
