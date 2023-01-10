@@ -28,6 +28,8 @@ openstack coe cluster create "$1" \
 --cluster-template "$VERSION" \
 --merge-labels \
 --labels cern_enabled=true \
+--labels oidc_enabled=true \
+--labels cinder_csi_enabled=True \
 --node-count 2 \
 --flavor m2.large
 
