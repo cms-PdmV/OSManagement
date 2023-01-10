@@ -1,0 +1,41 @@
+# Middleware
+# Reverse proxy: redirect all request coming from /couchdb to /
+# More details at:
+# https://doc.traefik.io/traefik/middlewares/http/overview/
+# https://doc.traefik.io/traefik/middlewares/http/stripprefix/
+# https://community.traefik.io/t/traefik-ingress-rewrite-target-does-not-work/13127/5
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: couchdb-database
+  namespace: default
+spec:
+  stripPrefix:
+    forceSlash: false
+    prefixes:
+      - /couchdb
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: couchdb-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.entryPoints: "http"
+    traefik.ingress.kubernetes.io/preserve-host: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: http
+    traefik.ingress.kubernetes.io/router.middlewares: default-couchdb-database@kubernetescrd
+spec:
+  rules:
+    - host: <LANDB_HOST>
+      http:
+        paths:
+          - path: /couchdb
+            pathType: Prefix
+            backend:
+              service:
+                name: <COUCHDB_SERVICE>
+                port:
+                  number: 5984
